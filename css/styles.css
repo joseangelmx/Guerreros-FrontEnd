@@ -1,0 +1,13 @@
+.color{
+    background-color:  #0082c9 ;
+}
+.background {
+    background: #1a1f2e; /* Color de fondo azul oscuro */
+    background: -webkit-linear-gradient(to bottom, #1a1f2e, #0b0e17); /* Gradiente de azul oscuro */
+    background: linear-gradient(to bottom, #1a1f2e, #0b0e17);
+    min-height: 100vh;
+}
+.hand-pointer {
+    cursor: pointer;
+  }
+  
