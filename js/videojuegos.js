@@ -1,3 +1,4 @@
+const endpoint = "https://localhost:7165/api/videogame/";
 window.addEventListener('load', () => {
     const cardContainer = document.getElementById("cardContainer");
     const buttonModal = document.getElementById("buttonModal");
@@ -41,16 +42,35 @@ window.addEventListener('load', () => {
     
 
     function fetchAndRenderData() {
-        fetch('https://localhost:44354/api/videogame')
+        fetch(endpoint)
             .then(response => response.json())
             .then(data => {
-                data.forEach(record => {
-                    const card = createCard(record);
-                    cardContainer.appendChild(card);
-                });
+                if (data.length === 0) {
+                    const noRecordsMessage = document.createElement('p');
+                    noRecordsMessage.textContent = 'No records available.';
+                    noRecordsMessage.style.color = "white";
+                    noRecordsMessage.style.display = 'flex';
+                    noRecordsMessage.style.justifyContent = 'center';
+                    noRecordsMessage.style.height = '100vh';
+                    cardContainer.appendChild(noRecordsMessage);
+                } else {
+                    data.forEach(record => {
+                        const card = createCard(record);
+                        cardContainer.appendChild(card);
+                    });
+                }
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error =>{                        
+                const noRecordsMessage = document.createElement('p');
+            noRecordsMessage.textContent = 'ERROR IN THE SERVICE';
+            noRecordsMessage.style.color = "white";
+            noRecordsMessage.style.display = 'flex';
+            noRecordsMessage.style.justifyContent = 'center';
+            noRecordsMessage.style.height = '100vh';
+            cardContainer.appendChild(noRecordsMessage);
+        });
     }
+    
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -64,7 +84,7 @@ window.addEventListener('load', () => {
         };
 
         // Fetch and add new game
-        fetch('https://localhost:44354/api/videogame', {
+        fetch(endpoint, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -94,7 +114,7 @@ window.addEventListener('load', () => {
         };
 
         // Fetch and update game
-        fetch('https://localhost:44354/api/videogame/' + game.id, {
+        fetch(endpoint + game.id, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -137,7 +157,7 @@ function editEntry(id) {
     var publisher = document.getElementById("editPublisher");
     var modal = document.getElementById("editGameModal");
     
-    fetch('https://localhost:44354/api/videogame/' + id)
+    fetch(endpoint + id)
     .then(response => {
         if (response.ok) {
             return response.json();
@@ -160,7 +180,7 @@ function editEntry(id) {
 }
 
 function deleteEntry(recordId) {
-    fetch('https://localhost:44354/api/videogame/' + recordId, {
+    fetch(endpoint + recordId, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
