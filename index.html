@@ -4,123 +4,67 @@
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="http://localhost:8080/videogame/node_modules/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://localhost:8080/videogame/css/styles.css">
-        <script src="http://localhost:8080/videogame/js/videojuegos.js"></script>
+        <link rel="stylesheet" href="http://localhost:8080/videogame/css/login.css">
+        
     </head>
-    <body>
-        
-        <nav class="navbar color" data-bs-theme="dark">
-            <div class="container-fluid d-flex justify-content-center align-items-center">
-                <a class="navbar-brand text-white" href="#">
-                    Videogames HUB
-                </a>
-            </div>
-            <div class="container-fluid d-flex justify-content-end align-items-center">
-                <button class="btn bg-danger" id="logoutButton">Cerrar sesión</button>
-            </div>
-        </nav>
-        
-        
-          <div class="background">
-            <div class="container py-5">
-                <div class="row text-center text-white">
-                    <div class="col-lg-8 mx-auto">
-                        <h1 class="display-4">List of Video Games</h1>
-        
-                        <br>
-                        <button class="btn btn-primary" id="buttonModal">Register a New Game</button>
-                        <br>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row" id="cardContainer">
-
-                </div>
-            </div>
-
-            <div class="modal" id="addGameModal" tabindex="-1">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Add Video Game</h5>
-                            <button type="button" id="buttonCloseModal" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <body class="container-fluid">
+        <br><br><br><br><br><br><br>
+        <div class ="row">
+            <div class="col-md-6 mx-auto p-0">
+                <div class="card">
+        <div class="login-box">
+            <div class="login-snip">
+                <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Login</label>
+                <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+                <div class="login-space">
+                    <div class="login">
+                        <br><br>
+                        <div class="group">
+                            <label for="emailLog" class="label">Email</label>
+                            <input id="emailLog" type="email" class="input"  placeholder="Enter your username">
                         </div>
-                        <div class="modal-body">
-                            <form id="addGameForm">
-                                <div class="mb-3">
-                                    <label for="title" class="form-label">Title</label>
-                                    <input type="text" class="form-control" id="title" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="description" class="form-label">Description</label>
-                                    <textarea class="form-control" id="description" rows="3" required></textarea>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="year" class="form-label">Year</label>
-                                    <input type="number" class="form-control" id="year" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="genre" class="form-label">Genre</label>
-                                    <input type="text" class="form-control" id="genre" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="publisher" class="form-label">Publisher</label>
-                                    <input type="text" class="form-control" id="publisher" required>
-                                </div>
-                                <div class="d-flex justify-content-center">
-                                    <button id="submit" type="submit" class="btn bg-primary text-white">Register</button>
-                                </div>
-                            </form>
+                        <div class="group">
+                            <label for="passwordLog" class="label">Password</label>
+                            <input id="passwordLog" type="password" class="input" data-type="password" placeholder="Enter your password">
+                        </div>
+                        <br><br>
+                        <div class="group">
+                            <input id="signin-button" type="submit" class="button" value="Sign In">
+                        </div> 
+                    </div>
+                    <div class="sign-up-form">
+                        <form id="registration-form">
+                            <div class="group">
+                                <label for="email" class="label">Email Address</label>
+                                <input id="email" type="email" class="input" placeholder="Enter your email address">
+                            </div>
+                            <div class="group">
+                                <label for="phoneNumber" class="label">Phone Number</label>
+                                <input id="phoneNumber" type="number" class="input" style="-moz-appearance: textfield;" placeholder="Enter your email address">
+                            </div>
+                            <div class="group">
+                                <label for="pass" class="label">Password</label>
+                                <input id="pass" type="password" class="input" data-type="password" placeholder="Create your password">
+                                <div id="passwordValidation" class="text-danger"></div>
+                            </div>
+    
+                            <div class="group">
+                                <input type="submit" class="button" value="Sign Up">
+                            </div>
+                        </form>
+
+                        <div class="hr"></div>
+                        <div class="foot">
+                            <label class="text-white" for="tab-1">Already Member?</label>
                         </div>
                     </div>
                 </div>
+                <script src="http://localhost:8080/videogame/js/login.js"></script>
             </div>
-            
-   
-              <div class="modal" id="editGameModal" tabindex="-1">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Edit Video Game</h5>
-                            <button type="button" id="buttonCloseEditModal" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="editGameForm">
-                                <input type="number" class="form-control" style="display: none;" id="idInput" required>
-                                <div class="mb-3">
-                                    <label for="title" class="form-label">Title</label>
-                                    <input type="text" class="form-control" id="editTitle" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="description" class="form-label">Description</label>
-                                    <textarea class="form-control" id="editDescription" rows="3" required></textarea>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="year" class="form-label">Year</label>
-                                    <input type="number" class="form-control" id="editYear" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="genre" class="form-label">Genre</label>
-                                    <input type="text" class="form-control" id="editGenre" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="publisher" class="form-label">Publisher</label>
-                                    <input type="text" class="form-control" id="editPublisher" required>
-                                </div>
-                                <div class="d-flex justify-content-center">
-                                    <button type="submit" class="btn bg-primary text-white">Edit Video Game</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-
-
-          </div>
-        <script src="http://localhost:8080/videogame/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="https://kit.fontawesome.com/a2bc0839d2.js" crossorigin="anonymous"></script>
+        </div>   
+        </div>
+        </div>
+        </div>
+        
     </body>
 </html>
