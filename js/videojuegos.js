@@ -16,7 +16,7 @@ window.addEventListener('load', () => {
     buttonCloseModal.addEventListener('click', () => {
         modal.style.display = "none";
     });
-    checkCookieAndRedirect();
+
     buttonCloseEditModal.addEventListener('click', () => {
         editModal.style.display = "none";
     });
@@ -221,30 +221,36 @@ function editEntry(id) {
 
 function deleteEntry(recordId) {
     const token = getTokenFromCookie(); // Obtener el token de la cookie
-    
-    fetch(endpoint + recordId, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}` // Agregar el token al encabezado
-        }
-    })
-    .then(response => {
-        if (response.ok) {
-            // El registro se eliminó correctamente, puedes realizar algunas acciones después de la eliminación
-            console.log('Registro eliminado correctamente');
-            location.reload();
-            // Puedes recargar la página o actualizar la lista de registros aquí si es necesario
-        } else {
-            // Manejar el caso en que no se pudo eliminar el registro
-            console.log('Fallo en la eliminación del registro');
-        }
-    })
-    .catch(error => {
-        // Manejar errores si es necesario
-        console.error('Error:', error);
-    });
+
+    // Mostrar ventana de confirmación
+    const isConfirmed = confirm('¿Estás seguro de que deseas eliminar este registro?');
+
+    if (isConfirmed) {
+        fetch(endpoint + recordId, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` // Agregar el token al encabezado
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // El registro se eliminó correctamente, puedes realizar algunas acciones después de la eliminación
+                console.log('Registro eliminado correctamente');
+                location.reload();
+                // Puedes recargar la página o actualizar la lista de registros aquí si es necesario
+            } else {
+                // Manejar el caso en que no se pudo eliminar el registro
+                console.log('Fallo en la eliminación del registro');
+            }
+        })
+        .catch(error => {
+            // Manejar errores si es necesario
+            console.error('Error:', error);
+        });
+    }
 }
+
 
 function getTokenFromCookie() {
     const cookies = document.cookie.split('; ');
@@ -256,13 +262,7 @@ function getTokenFromCookie() {
     }
     return null;
 }
-function checkCookieAndRedirect() {
-    const token = getTokenFromCookie(); // Obtener el token de la cookie
 
-    if (!token) {
-        window.location.href = 'index.html'; // Redirigir al index si no hay token
-    }
-}
 const passwordInput = document.getElementById('pass');
 const passwordValidation = document.getElementById('passwordValidation');
 
